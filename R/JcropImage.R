@@ -12,13 +12,10 @@ JcropImageOutput <- function(outputId, width = "100%", height = "400px" ){
 renderJcropImage <- function(expr, env = parent.frame(), quoted = FALSE, background = "white", opacity = 1, aspect_ratio = 1 ) {
   installExprFunction(expr, "func", env, quoted)
   renderFunc <- function(shinysession, name, ...) {
-    imageinfo <- func()
-    contentType <- imageinfo$contentType %OR% .getContentType(imageinfo$src)
-    extra_attr <- imageinfo[!names(imageinfo) %in% c("src", "contentType")]
-    data <- c(src = shinysession$fileUrl(name, file = imageinfo$src, contentType = contentType), extra_attr)
+    imageinfo <- .image_file_info(func())
 
     x <- list(
-      data = data,
+      data = shinysession$fileUrl(name, file = imageinfo$src, contentType = imageinfo$contentType),
       background = background,
       opacity = opacity,
       aspect_ratio = aspect_ratio
@@ -31,4 +28,19 @@ renderJcropImage <- function(expr, env = parent.frame(), quoted = FALSE, backgro
     .toJSON(payload)
   }
   markRenderFunction(JcropImageOutput, renderFunc)
+}
+
+#' @importFrom magrittr %>%
+#' @importFrom mime guess_type
+#' @importFrom magick image_read image_info
+.image_file_info <- function(file){
+  type <- guess_type(file)
+  info <- image_read(file) %>% image_info()
+
+  list(
+    src = file,
+    contentType = type,
+    width = info$width,
+    height = info$height
+  )
 }

@@ -30,7 +30,9 @@ HTMLWidgets.widget({
 
     return {
       renderValue: function(x) {
-          var new_src = x.data.src ;
+        console.log(x) ;
+
+          var new_src = x.data ;
           src = new_src ;
 
           if( img === null ){

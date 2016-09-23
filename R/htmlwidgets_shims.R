@@ -83,4 +83,3 @@
   else do.call(func, c(list(x = x), args))
   structure(res, class = "json")
 }
-
