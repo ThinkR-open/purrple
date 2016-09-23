@@ -52,6 +52,8 @@ HTMLWidgets.widget({
             }) ;
           } else {
               gadget.setImage( src ) ;
+              Shiny.onInputChange( id + "_select", null ) ;
+              Shiny.onInputChange( id + "_change", null ) ;
           }
 
       },

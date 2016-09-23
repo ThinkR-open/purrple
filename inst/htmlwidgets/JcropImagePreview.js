@@ -15,23 +15,24 @@ HTMLWidgets.widget({
     return {
 
       renderValue: function(x) {
+
+        if( !ready ){
+          var node =
+            '<div id="' + id + '-preview-pane" class="jcrop-preview-pane">' +
+            '  <div class="preview-container">' +
+            '    <img class="jcrop-preview" />' +
+            '  </div>' +
+            '</div>'
+          ;
+
+          $(el).append(node) ;
+          ready = true ;
+        }
+
         if( x.event ){
           var event = x.event ;
           image_id = x.image ;
 
-          if( !ready ){
-
-            var node =
-              '<div id="' + id + '-preview-pane" class="jcrop-preview-pane">' +
-              '  <div class="preview-container">' +
-              '    <img class="jcrop-preview" alt="Preview" />' +
-              '  </div>' +
-              '</div>'
-            ;
-
-            $(el).append(node) ;
-            ready = true ;
-          }
           $img = $("#" + id + " div div img") ;
           $container = $("#" + id ) ;
 
@@ -54,6 +55,8 @@ HTMLWidgets.widget({
             marginTop: '-' + Math.round(ry * event.y) + 'px'
           }) ;
 
+        } else if( $img ){
+          $img.attr("src", null ) ;
         }
 
       },
