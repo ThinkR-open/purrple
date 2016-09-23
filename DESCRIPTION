@@ -1,0 +1,12 @@
+Package: purrpleWidgets
+Title: Some html widgets
+Version: 0.0.0.9000
+Authors@R: person("Romain", "Francois", email = "romain@purrple.cat", role = c("aut", "cre"))
+Description: Some html widgets
+Depends:
+    R (>= 3.3.1)
+License: MIT
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 5.0.1
+Imports: htmltools, htmlwidgets, shiny, mime, utils, jsonlite

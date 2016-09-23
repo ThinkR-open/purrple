@@ -1,0 +1,9 @@
+.preview-container{
+  overflow: hidden ;
+}
+
+.JcropImagePreview div {
+  width: inherit ;
+  height: inherit ;
+  border: 1px solid red ;
+}

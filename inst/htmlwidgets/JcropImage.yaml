@@ -1,0 +1,12 @@
+dependencies:
+  - name: Jcrop
+    version: 0.9.12
+    src: htmlwidgets/lib/Jcrop-0.9.12/
+    script:
+      - js/jquery.color.js
+      - js/jquery.Jcrop.js
+      - js/jquery.Jcrop.min.js
+    stylesheet:
+      - css/jquery.Jcrop.css
+      - css/jquery.Jcrop.min.css
+      - css/purrpleWidgets_Jcrop.css
