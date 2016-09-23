@@ -24,7 +24,8 @@ HTMLWidgets.widget({
     } ;
 
     var onRelease = function(){
-      Shiny.onInputChange( id + "_release" ) ;
+      Shiny.onInputChange( id + "_select", null ) ;
+      Shiny.onInputChange( id + "_change", null ) ;
     } ;
 
     return {
@@ -36,8 +37,11 @@ HTMLWidgets.widget({
             $(el).append( '<img />') ;
             img = $( "#" + id + " img") ;
             img.attr("src", src) ;
-            if( x.data.width ) img.width( x.data.width ) ;
-            if( x.data.height ) img.width( x.data.height ) ;
+
+            img.css({
+              "max-width": $(el).width(),
+              "max-height": $(el).height()
+            }) ;
             if( x.data.alt ) img.attr( "alt" , x.data.alt ) ;
 
             img.Jcrop({
@@ -49,6 +53,7 @@ HTMLWidgets.widget({
               onRelease: onRelease
             }, function(){
               gadget = this ;
+              el.gadget = this ;
             }) ;
           } else {
               gadget.setImage( src ) ;
@@ -58,8 +63,7 @@ HTMLWidgets.widget({
 
       },
 
-      resize: function(width, height) {
-      }
+      resize: function(width, height) {}
 
     };
   }

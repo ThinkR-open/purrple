@@ -4,10 +4,10 @@ library(magick)
 
 ui = shinyUI(fluidPage(
 
-  actionButton("reset", label = "reset"),
+  actionButton("reset", label = "new cat"),
 
   fluidRow(
-    column(6, JcropImageOutput("image")),
+    column(6, JcropImageOutput("image", height = 600 )),
     column(6, JcropImagePreviewOutput("preview", width = 400, height = 400))
   )
 
@@ -16,7 +16,7 @@ ui = shinyUI(fluidPage(
 server = function(input, output, session) {
   image <- reactive({
     input$reset
-    file <- sample( list.files( system.file("base", package = "tipixel"), full.names = TRUE), 1 )
+    file <- sample( list.files( system.file("cats", package = "purrpleWidgets"), full.names = TRUE), 1 )
     im <- image_read(file)[[1]]
     width  <- dim(im)[2]
     height <- dim(im)[3]

@@ -2,8 +2,11 @@
   overflow: hidden ;
 }
 
+.JcropImage {
+  overflow: hidden ;
+}
+
 .JcropImagePreview div {
   width: inherit ;
   height: inherit ;
-  border: 1px solid red ;
 }
