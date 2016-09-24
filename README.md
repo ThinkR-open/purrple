@@ -1,6 +1,6 @@
 # purrpleWidgets
 
-## JcropImage widgets
+## JcropImage
 
 The `JcropImage` widget embeds cropping capabilities powered 
 by the [Jcrop](http://deepliquid.com/content/Jcrop_Manual.html) javascript 
@@ -40,5 +40,20 @@ server = function(input, output, session) {
 shinyApp(ui = ui, server = server)
 ```
 
+The first text output reacts to `_change` events, and is therefore updated often. 
+The second text output reacts to `_select` events, so is only updated when the selection
+stops moving. 
+
 [![Demo](gifs/JcropImage1.gif)]()
+
+## JcropImage and JcropImagePreview
+
+The `JcropImagePreview` works together with `JcropImage` to display a zoom preview of the 
+selected part of the image. 
+
+```r
+
+```
+
+[![Demo](gifs/JcropImagePreview.gif)]()
 
