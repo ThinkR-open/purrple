@@ -31,7 +31,6 @@ HTMLWidgets.widget({
     return {
       renderValue: function(x) {
           src = x.data ;
-          $(el).attr("aspect_ratio", x.aspect_ratio) ;
 
           if( img === null ){
             $(el).append( '<img />') ;

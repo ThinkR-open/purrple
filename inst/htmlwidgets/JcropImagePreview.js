@@ -32,11 +32,8 @@ HTMLWidgets.widget({
         }
 
         if( x.event ){
-          if( aspect_ratio === null){
-            aspect_ratio = $("#" + image_id).attr("aspect_ratio") ;
-          }
-
           var event = x.event ;
+          aspect_ratio = event.w / event.h ;
 
           $img = $("#" + id + " div div img") ;
           $container = $("#" + id ) ;
