@@ -8,7 +8,7 @@ ui = shinyUI(fluidPage(
 
   fluidRow(
     column(6, JcropImageOutput("image", height = 600 )),
-    column(6, JcropImagePreviewOutput("preview", width = 400, height = 400))
+    column(2, JcropImagePreviewOutput("preview"))
   )
 
 ))
@@ -19,7 +19,7 @@ server = function(input, output, session) {
     sample( list.files( system.file("cats", package = "purrpleWidgets"), full.names = TRUE), 1 )
   })
 
-  output$image <- renderJcropImage( image() , opacity = .3 )
+  output$image <- renderJcropImage( image() , opacity = .3, aspect_ratio = NULL  )
   output$preview <- renderJcropImagePreview( JcropImagePreview("image", input$image_change) )
 
 }
