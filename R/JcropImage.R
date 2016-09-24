@@ -9,7 +9,7 @@ JcropImageOutput <- function(outputId, width = "100%", height = "400px" ){
 #' @importFrom htmltools resolveDependencies
 #' @importFrom shiny installExprFunction createWebDependency
 #' @export
-renderJcropImage <- function(expr, env = parent.frame(), quoted = FALSE, background = "white", opacity = 1, aspect_ratio = 1 ) {
+renderJcropImage <- function(expr, env = parent.frame(), quoted = FALSE, background = "white", opacity = .3, aspect_ratio = 1 ) {
   installExprFunction(expr, "func", env, quoted)
   renderFunc <- function(shinysession, name, ...) {
     imageinfo <- .image_file_info(func())
