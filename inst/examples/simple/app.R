@@ -2,13 +2,7 @@ library(shiny)
 library(purrpleWidgets)
 
 ui = shinyUI(fluidPage(
-  textOutput("change"),
-  textOutput("select"),
-
-  fluidRow(
-    JcropImageOutput("image")
-  )
-
+  textOutput("change"), textOutput("select"), JcropImageOutput("image")
 ))
 
 server = function(input, output, session) {
@@ -18,23 +12,16 @@ server = function(input, output, session) {
     opacity = .3
   )
 
-  output$change <- renderText( {
-    data <- input$image_change
+  selection <- function(data){
     if( is.null(data) ) {
       "no selection"
     } else {
       paste( names(data), " : ", data , sep = "", collapse = ", ")
     }
-  })
+  }
 
-  output$select <- renderText( {
-    data <- input$image_select
-    if( is.null(data) ) {
-      "no selection"
-    } else {
-      paste( names(data), " : ", data , sep = "", collapse = ", ")
-    }
-  })
+  output$change <- renderText( selection(input$image_change))
+  output$select <- renderText( selection(input$image_select))
 
 }
 
