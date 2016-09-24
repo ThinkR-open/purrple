@@ -27,6 +27,7 @@ HTMLWidgets.widget({
           ;
 
           $(el).append(node) ;
+          $(el).css( { margin: "auto" }) ;
 
           ready = true ;
         }
@@ -37,6 +38,7 @@ HTMLWidgets.widget({
 
           $img = $("#" + id + " div div img") ;
           $container = $("#" + id ) ;
+          $preview_pane = $("#" + id  + " div:first") ;
 
           $source= $("#" + image_id + " div img:first");
 
@@ -44,8 +46,20 @@ HTMLWidgets.widget({
 
           var boundx = $source.width() ;
           var boundy = $source.height() ;
-          var xsize  = $container.width() ;
-          var ysize  = $container.height() ;
+
+          var width  = $container.width() ;
+          var height = $container.height() ;
+          var xsize  = width ;
+          var ysize  = height ;
+          if( width / aspect_ratio > height){
+            ysize = height ;
+            xsize = height * aspect_ratio ;
+          } else {
+            xsize = width ;
+            ysize = width / aspect_ratio ;
+          }
+          $preview_pane.width( xsize ) ;
+          $preview_pane.height( ysize ) ;
 
           var rx = xsize / event.w;
           var ry = ysize / event.h;
