@@ -1,2 +1,12 @@
 # purrpleWidgets
-some html widgets
+
+## JcropImage widgets
+
+The `JcropImage` widget embeds cropping capabilities powered 
+by the [http://deepliquid.com/content/Jcrop_Manual.html](Jcrop) javascript 
+library. 
+
+It is intended to be used in a shiny application. 
+
+[![Demo](gifs/JcropImage1.gif)]()
+
