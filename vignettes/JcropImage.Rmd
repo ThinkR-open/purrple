@@ -1,0 +1,23 @@
+---
+title: "Jcrop Image widgets"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Jcrop Image widgets}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(collapse = T, comment = "#>")
+options(tibble.print_min = 4L, tibble.print_max = 4L)
+library(purrpleWidgets)
+```
+
+The `JcropImage` widget embeds cropping capabilities powered 
+by the [http://deepliquid.com/content/Jcrop_Manual.html](Jcrop) javascript 
+library. 
+
+It is intended to be used in a shiny application. 
+
+

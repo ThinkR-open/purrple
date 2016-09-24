@@ -2,10 +2,12 @@ library(shiny)
 library(purrpleWidgets)
 
 ui = shinyUI(fluidPage(
-  textOutput("coords"),
+  textOutput("change"),
+  textOutput("select"),
+
   fluidRow(
     JcropImageOutput("image")
-    )
+  )
 
 ))
 
@@ -15,8 +17,18 @@ server = function(input, output, session) {
     system.file( "cats", "cat2.jpg", package = "purrpleWidgets" ),
     opacity = .3
   )
-  output$coords <- renderText( {
+
+  output$change <- renderText( {
     data <- input$image_change
+    if( is.null(data) ) {
+      "no selection"
+    } else {
+      paste( names(data), " : ", data , sep = "", collapse = ", ")
+    }
+  })
+
+  output$select <- renderText( {
+    data <- input$image_select
     if( is.null(data) ) {
       "no selection"
     } else {
