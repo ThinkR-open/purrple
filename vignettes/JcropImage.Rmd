@@ -20,4 +20,6 @@ library.
 
 It is intended to be used in a shiny application. 
 
+[Demo](./JcropImage1.gif)]
+
 
