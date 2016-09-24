@@ -1,11 +1,14 @@
 Package: purrpleWidgets
 Title: Some html widgets
 Version: 0.0.0
-Authors@R: person("Romain", "Francois", email = "romain@purrple.cat", role = c("aut", "cre"))
-Description: Some html widgets
+Authors@R: c(
+  person("Romain", "Francois", email = "romain@purrple.cat", role = c("aut", "cre")),
+  person("purrple", role = "cph")
+  )
+Description: Some html widgets.
 Depends:
     R (>= 3.3.1)
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 5.0.1
