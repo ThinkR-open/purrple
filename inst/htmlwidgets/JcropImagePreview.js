@@ -11,11 +11,12 @@ HTMLWidgets.widget({
     var image_id = null;
     var $img = null ;
     var $source ;
+    var aspect_ratio = null ;
 
     return {
 
       renderValue: function(x) {
-
+        image_id = x.image ;
         if( !ready ){
           var node =
             '<div id="' + id + '-preview-pane" class="jcrop-preview-pane">' +
@@ -26,12 +27,16 @@ HTMLWidgets.widget({
           ;
 
           $(el).append(node) ;
+
           ready = true ;
         }
 
         if( x.event ){
+          if( aspect_ratio === null){
+            aspect_ratio = $("#" + image_id).attr("aspect_ratio") ;
+          }
+
           var event = x.event ;
-          image_id = x.image ;
 
           $img = $("#" + id + " div div img") ;
           $container = $("#" + id ) ;
