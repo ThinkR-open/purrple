@@ -3,6 +3,8 @@
 export(JcropImageOutput)
 export(JcropImagePreview)
 export(JcropImagePreviewOutput)
+export(fluidImageOutput)
+export(renderFluidImage)
 export(renderJcropImage)
 export(renderJcropImagePreview)
 importFrom(htmltools,resolveDependencies)
