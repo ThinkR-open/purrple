@@ -49,14 +49,17 @@ globalVariables( "func" )
 renderJcropImage <- function(expr, background = "white", opacity = .3, aspect_ratio = 1, env = parent.frame(), quoted = FALSE) {
   installExprFunction(expr, "func", env, quoted)
   renderFunc <- function(shinysession, name, ...) {
-    imageinfo <- .image_file_info(func())
+    image <- func()
 
-    x <- list(
-      data = shinysession$fileUrl(name, file = imageinfo$src, contentType = imageinfo$contentType),
-      background = background,
-      opacity = opacity,
-      aspect_ratio = aspect_ratio
-    )
+    x <- if( !is.null(image) ){
+      imageinfo <- .image_file_info(image)
+      list(
+        data = shinysession$fileUrl(name, file = imageinfo$src, contentType = imageinfo$contentType),
+        background = background,
+        opacity = opacity,
+        aspect_ratio = aspect_ratio
+      )
+    }
 
     instance <- createWidget( name = 'JcropImage', x, package = 'purrpleWidgets')
     deps <- .subset2(instance, "dependencies")
