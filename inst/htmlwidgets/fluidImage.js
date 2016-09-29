@@ -42,6 +42,7 @@ HTMLWidgets.widget({
           $img = $("#" + id + " img") ;
         }
         src = x.data ;
+        console.log( x ) ;
         $img.attr("src", src) ;
         x_width = x.width ;
         x_height = x.height ;

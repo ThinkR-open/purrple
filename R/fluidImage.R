@@ -26,13 +26,17 @@ fluidImageOutput <- function(outputId, width = '100%', height = '400px'){
 renderFluidImage <- function(expr, env = parent.frame(), quoted = FALSE) {
   installExprFunction(expr, "func", env, quoted)
   renderFunc <- function(shinysession, name, ...) {
-    imageinfo <- .image_file_info(func())
+    image <- func()
 
-    x <- list(
-      data = shinysession$fileUrl(name, file = imageinfo$src, contentType = imageinfo$contentType),
-      width = imageinfo$width,
-      height = imageinfo$height
-    )
+    x <- if( !is.null(image)){
+      imageinfo <- .image_file_info(image)
+
+      list(
+        data = shinysession$fileUrl(name, file = imageinfo$src, contentType = imageinfo$contentType),
+        width = imageinfo$width,
+        height = imageinfo$height
+      )
+    }
 
     instance <- createWidget( name = 'fluidImage', x, package = 'purrpleWidgets')
     deps <- .subset2(instance, "dependencies")
