@@ -30,35 +30,37 @@ HTMLWidgets.widget({
 
     return {
       renderValue: function(x) {
-          src = x.data ;
+        if( x === null) return ;
 
-          if( img === null ){
-            $(el).append( '<img />') ;
-            img = $( "#" + id + " img") ;
-            img.attr("src", src) ;
+        src = x.data ;
 
-            img.css({
-              "max-width": $(el).width(),
-              "max-height": $(el).height()
-            }) ;
-            if( x.data.alt ) img.attr( "alt" , x.data.alt ) ;
+        if( img === null ){
+          $(el).append( '<img />') ;
+          img = $( "#" + id + " img") ;
+          img.attr("src", src) ;
 
-            img.Jcrop({
-              aspectRatio: x.aspect_ratio,
-              bgColor: x.bg,
-              bgOpacity: x.opacity,
-              onChange: onChange,
-              onSelect: onSelect,
-              onRelease: onRelease
-            }, function(){
-              gadget = this ;
-              el.gadget = this ;
-            }) ;
-          } else {
-              gadget.setImage( src ) ;
-              Shiny.onInputChange( id + "_select", null ) ;
-              Shiny.onInputChange( id + "_change", null ) ;
-          }
+          img.css({
+            "max-width": $(el).width(),
+            "max-height": $(el).height()
+          }) ;
+          if( x.data.alt ) img.attr( "alt" , x.data.alt ) ;
+
+          img.Jcrop({
+            aspectRatio: x.aspect_ratio,
+            bgColor: x.bg,
+            bgOpacity: x.opacity,
+            onChange: onChange,
+            onSelect: onSelect,
+            onRelease: onRelease
+          }, function(){
+            gadget = this ;
+            el.gadget = this ;
+          }) ;
+        } else {
+            gadget.setImage( src ) ;
+            Shiny.onInputChange( id + "_select", null ) ;
+            Shiny.onInputChange( id + "_change", null ) ;
+        }
 
       },
 
