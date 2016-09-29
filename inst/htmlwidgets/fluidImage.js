@@ -5,7 +5,6 @@ HTMLWidgets.widget({
   type: 'output',
 
   factory: function(el, width, height) {
-
     var id = null  ;
     var src ;
     var $img ;
@@ -13,7 +12,6 @@ HTMLWidgets.widget({
 
     var reset = function( w, h ){
       var ratio = x_width / x_height ;
-      console.log( ratio ) ;
       var width = x_width ;
       var height = x_height ;
 
@@ -42,7 +40,6 @@ HTMLWidgets.widget({
           $img = $("#" + id + " img") ;
         }
         src = x.data ;
-        console.log( x ) ;
         $img.attr("src", src) ;
         x_width = x.width ;
         x_height = x.height ;
