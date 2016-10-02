@@ -24,7 +24,7 @@ HTMLWidgets.widget({
         width  = height * ratio ;
       }
 
-      $img.css( {
+      $img.css({
         width: width,
         height: height
       }) ;
@@ -38,12 +38,15 @@ HTMLWidgets.widget({
           id = el.id;
           $(el).append( "<img/>") ;
           $img = $("#" + id + " img") ;
+          $img.load( function(){
+            x_width = $img.width() ;
+            x_height = $img.height() ;
+            reset( $(el).width(), $(el).height() ) ;
+          }) ;
         }
         src = x.data ;
+
         $img.attr("src", src) ;
-        x_width = x.width ;
-        x_height = x.height ;
-        reset( $(el).width(), $(el).height() ) ;
       },
 
       resize: function(width, height) {

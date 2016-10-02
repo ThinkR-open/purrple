@@ -4,14 +4,12 @@
 \alias{renderFluidImage}
 \title{renderer for fluid image output}
 \usage{
-renderFluidImage(expr, env = parent.frame(), quoted = FALSE)
+renderFluidImage(expr, session = get("session", parent.frame()))
 }
 \arguments{
 \item{expr}{expression that evaluates to a file name on the server.}
 
-\item{env}{environment}
-
-\item{quoted}{whether the expression is quoted}
+\item{session}{shiny session}
 }
 \description{
 renderer for fluid image output

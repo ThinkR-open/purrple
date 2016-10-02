@@ -16,33 +16,17 @@ fluidImageOutput <- function(outputId, width = '100%', height = '400px'){
 #' renderer for fluid image output
 #'
 #' @param expr expression that evaluates to a file name on the server.
-#' @param env environment
-#' @param quoted whether the expression is quoted
+#' @param session shiny session
 #'
+#' @importFrom mime guess_type
 #' @importFrom htmlwidgets shinyRenderWidget createWidget
-#' @importFrom htmltools resolveDependencies
-#' @importFrom shiny installExprFunction createWebDependency markRenderFunction
 #' @export
-renderFluidImage <- function(expr, env = parent.frame(), quoted = FALSE) {
-  installExprFunction(expr, "func", env, quoted)
-  renderFunc <- function(shinysession, name, ...) {
-    image <- func()
-
-    x <- if( !is.null(image)){
-      imageinfo <- .image_file_info(image)
-
-      list(
-        data = shinysession$fileUrl(name, file = imageinfo$src, contentType = imageinfo$contentType),
-        width = imageinfo$width,
-        height = imageinfo$height
-      )
-    }
-
-    instance <- createWidget( name = 'fluidImage', x, package = 'purrpleWidgets')
-    deps <- .subset2(instance, "dependencies")
-    deps <- lapply(resolveDependencies(deps), createWebDependency)
-    payload <- c(.createPayload(instance), list(deps = deps))
-    .toJSON(payload)
-  }
-  markRenderFunction(fluidImageOutput, renderFunc)
+renderFluidImage <- function(expr, session = get("session", parent.frame())) {
+  env <- parent.frame()
+  expression <- substitute({
+    src <- eval( expr, envir = env)
+    x <- if( !is.null(src) ) session$fileUrl( src, contentType = guess_type(src) )
+    createWidget( name = "fluidImage", list( data = x ), package = "purrpleWidgets")
+  })
+  shinyRenderWidget( expression, fluidImageOutput, environment(), quoted = TRUE )
 }
