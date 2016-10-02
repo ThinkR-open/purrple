@@ -1,3 +1,4 @@
+
 library(shiny)
 library(purrpleWidgets)
 
@@ -12,7 +13,6 @@ ui = shinyUI(fluidPage(
 
 server = function(input, output, session) {
   image <- system.file("cats", "cat3.jpg", package = "purrpleWidgets")
-
   output$image <- renderJcropImage( image , opacity = .3, aspect_ratio = 1  )
   output$preview <- renderJcropImagePreview( JcropImagePreview("image", input$image_change) )
 

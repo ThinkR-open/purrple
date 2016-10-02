@@ -28,9 +28,6 @@ JcropImageOutput <- function(outputId, width = "100%", height = "400px" ){
   shinyWidgetOutput(outputId, 'JcropImage', width = width, height= height , package = 'purrpleWidgets')
 }
 
-# to help check
-globalVariables( "func" )
-
 #' Shiny renderer for JcropImageOutput
 #'
 #' Shiny renderer for JcropImageOutput
@@ -39,33 +36,20 @@ globalVariables( "func" )
 #' @param background background color to use when the selection is active
 #' @param opacity opacity of the background
 #' @param aspect_ratio aspect ratio (width / height) of the selection. If \code{NULL} the selection is free.
-#' @param env environment in which to evaluate \code{expr}
-#' @param quoted is the expression quoted
+#' @param session shiny session object
 #'
 #' @importFrom htmlwidgets shinyRenderWidget createWidget
-#' @importFrom htmltools resolveDependencies
-#' @importFrom shiny installExprFunction createWebDependency markRenderFunction
 #' @export
-renderJcropImage <- function(expr, background = "white", opacity = .3, aspect_ratio = 1, env = parent.frame(), quoted = FALSE) {
-  installExprFunction(expr, "func", env, quoted)
-  renderFunc <- function(shinysession, name, ...) {
-    image <- func()
+renderJcropImage <- function(expr, background = "white", opacity = .3, aspect_ratio = 1, session = get("session", parent.frame())) {
+  env <- parent.frame()
+  session <- force(session)
+  func <- exprToFunction(expr, env, quoted = FALSE)
 
-    x <- if( !is.null(image) ){
-      imageinfo <- .image_file_info(image)
-      list(
-        data = shinysession$fileUrl(name, file = imageinfo$src, contentType = imageinfo$contentType),
-        background = background,
-        opacity = opacity,
-        aspect_ratio = aspect_ratio
-      )
-    }
-
-    instance <- createWidget( name = 'JcropImage', x, package = 'purrpleWidgets')
-    deps <- .subset2(instance, "dependencies")
-    deps <- lapply(resolveDependencies(deps), createWebDependency)
-    payload <- c(.createPayload(instance), list(deps = deps))
-    .toJSON(payload)
-  }
-  markRenderFunction(JcropImageOutput, renderFunc)
+  expression <- substitute({
+    src <- func()
+    data <- if( !is.null(src) ) session$fileUrl( file = src, contentType = guess_type(src) )
+    x <- list( data = data, background = background, opacity = opacity, aspect_ratio = aspect_ratio )
+    createWidget( name = "JcropImage", x, package = "purrpleWidgets")
+  })
+  shinyRenderWidget( expression, JcropImageOutput, environment(), quoted = TRUE )
 }

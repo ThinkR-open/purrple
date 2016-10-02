@@ -5,7 +5,7 @@
 \title{Shiny renderer for JcropImageOutput}
 \usage{
 renderJcropImage(expr, background = "white", opacity = 0.3,
-  aspect_ratio = 1, env = parent.frame(), quoted = FALSE)
+  aspect_ratio = 1, session = get("session", parent.frame()))
 }
 \arguments{
 \item{expr}{expression that evaluates to a file name on the server. typically a temporary file.}
@@ -16,9 +16,7 @@ renderJcropImage(expr, background = "white", opacity = 0.3,
 
 \item{aspect_ratio}{aspect ratio (width / height) of the selection. If \code{NULL} the selection is free.}
 
-\item{env}{environment in which to evaluate \code{expr}}
-
-\item{quoted}{is the expression quoted}
+\item{session}{shiny session object}
 }
 \description{
 Shiny renderer for JcropImageOutput

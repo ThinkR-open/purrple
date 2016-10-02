@@ -20,13 +20,16 @@ fluidImageOutput <- function(outputId, width = '100%', height = '400px'){
 #'
 #' @importFrom mime guess_type
 #' @importFrom htmlwidgets shinyRenderWidget createWidget
+#' @importFrom shiny exprToFunction
 #' @export
 renderFluidImage <- function(expr, session = get("session", parent.frame())) {
   env <- parent.frame()
+  session <- force(session)
+  func <- exprToFunction(expr, env, quoted = FALSE)
   expression <- substitute({
-    src <- eval( expr, envir = env)
-    x <- if( !is.null(src) ) session$fileUrl( src, contentType = guess_type(src) )
-    createWidget( name = "fluidImage", list( data = x ), package = "purrpleWidgets")
+    src <- func()
+    data <- if( !is.null(src) ) session$fileUrl( file = src, contentType = guess_type(src) )
+    createWidget( name = "fluidImage", list( data = data ), package = "purrpleWidgets")
   })
   shinyRenderWidget( expression, fluidImageOutput, environment(), quoted = TRUE )
 }
