@@ -1,7 +1,7 @@
 
 purrple_page <- function(page){
   function(...){
-    page(purrple_logo(), ...)
+    page(..., purrple_logo())
   }
 }
 
