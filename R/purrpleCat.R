@@ -7,9 +7,9 @@
 #' @importFrom htmltools htmlDependency
 #' @export
 purrple_logo <- function(){
-
+  version <- packageDescription("purrpleWidgets")$Version
   dep <- htmlDependency(
-    name = "purrpleCat", version = "0.0.1",
+    name = "purrpleCat", version = version,
     src = system.file( "htmlwidgets", "lib", "purrpleCat", package = "purrpleWidgets"),
     script = "purrpleCat.js",
     attachment = c( sound = "purr.mp3", image = "purrple.png")
