@@ -28,6 +28,10 @@ JcropImageOutput <- function(outputId, width = "100%", height = "400px" ){
   shinyWidgetOutput(outputId, 'JcropImage', width = width, height= height , package = 'purrpleWidgets')
 }
 
+get_server_file <- function(src, session){
+  if(!is.null(src)) session$fileUrl( file = src, contentType = guess_type(src) )
+}
+
 #' Shiny renderer for JcropImageOutput
 #'
 #' Shiny renderer for JcropImageOutput
@@ -47,7 +51,7 @@ renderJcropImage <- function(expr, background = "white", opacity = .3, aspect_ra
 
   expression <- substitute({
     src <- func()
-    data <- if( !is.null(src) ) session$fileUrl( file = src, contentType = guess_type(src) )
+    data <- get_server_file(src, session=session)
     x <- list( data = data, background = background, opacity = opacity, aspect_ratio = aspect_ratio )
     createWidget( name = "JcropImage", x, package = "purrpleWidgets")
   })
