@@ -9,7 +9,8 @@ ui = shinyUI(fluidPage(
   fluidRow(
     column(6, fluidImageOutput("cat3", height = 400) ),
     column(6, fluidImageOutput("cat4", height = 400) )
-  )
+  ),
+  purrple_logo()
 ))
 
 server = function(input, output, session) {

@@ -2,7 +2,8 @@ library(shiny)
 library(purrpleWidgets)
 
 ui = shinyUI(fluidPage(
-  textOutput("change"), textOutput("select"), JcropImageOutput("image")
+  textOutput("change"), textOutput("select"), JcropImageOutput("image"),
+  purrple_logo()
 ))
 
 server = function(input, output, session) {
