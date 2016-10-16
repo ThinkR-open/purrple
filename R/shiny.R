@@ -1,7 +1,20 @@
 
+#' @importFrom htmltools htmlDependency
+purrple_logo_dependency <- function(){
+  htmlDependency(
+    name = "purrpleCat", version = packageDescription("purrpleWidgets")$Version,
+    src = system.file( "htmlwidgets", "lib", "purrpleCat", package = "purrpleWidgets"),
+    script = "purrpleCat.js",
+    attachment = c( sound = "purr.mp3", image = "purrple.png")
+  )
+}
+
 purrple_page <- function(page){
   function(...){
-    page(..., purrple_logo())
+    p <- page(...)
+    dep <- append( attr(p, "html_dependencies"), list( purrple_logo_dependency() ) )
+    attr(p, "html_dependencies") <- dep
+    p
   }
 }
 

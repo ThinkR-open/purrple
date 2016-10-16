@@ -18,7 +18,7 @@ $( function(){
     purr_sound.play() ;
   }) ;
 
-  $("#purrple_cat_logo").html( $img ) ;
+  $("body").append( $img ) ;
   $img.animate( { opacity: 1}, 5000 ) ;
 
 }) ;
