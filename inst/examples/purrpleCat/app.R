@@ -3,12 +3,12 @@ library(purrpleWidgets)
 
 ui = shinyUI(fluidPage(
 
-  purrpleCatOutput("meow")
+  purrpleLogo()
 
 ))
 
 server = function(input, output, session) {
-  output$meow <- renderPurrpleCat(session)
+
 }
 
 shinyApp(ui = ui, server = server)
