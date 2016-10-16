@@ -5,7 +5,7 @@
 #' The cat purrs when you mouse hover it
 #'
 #' @importFrom htmltools htmlDependency
-#' @export
+#' @noRd
 purrple_logo <- function(){
   version <- packageDescription("purrpleWidgets")$Version
   dep <- htmlDependency(
