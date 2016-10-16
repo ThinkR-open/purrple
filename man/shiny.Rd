@@ -5,6 +5,7 @@
 \alias{bootstrapPage}
 \alias{fillPage}
 \alias{fixedPage}
+\alias{fluidPage}
 \alias{navbarPage}
 \title{Modified version of shiny pages with purrple branding}
 \usage{
@@ -17,6 +18,8 @@ fillPage(...)
 fixedPage(...)
 
 navbarPage(...)
+
+fluidPage(...)
 }
 \arguments{
 \item{\dots}{see \link[shiny]{basicPage}}

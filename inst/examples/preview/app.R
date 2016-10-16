@@ -7,8 +7,8 @@ ui = shinyUI(fluidPage(
   fluidRow(
     column(6, JcropImageOutput("image", height = 400 )),
     column(2, JcropImagePreviewOutput("preview", width = 400 ))
-  ),
-  purrple_logo()
+  )
+
 ))
 
 server = function(input, output, session) {
