@@ -23,7 +23,7 @@ JcropImagePreview <- function(image, event, width = NULL, height = NULL, element
     x,
     width = width,
     height = height,
-    package = 'purrpleWidgets',
+    package = 'purrple',
     elementId = elementId
   )
 }
@@ -38,7 +38,7 @@ JcropImagePreview <- function(image, event, width = NULL, height = NULL, element
 #' @importFrom htmlwidgets shinyWidgetOutput
 #' @export
 JcropImagePreviewOutput <- function(outputId, width = '100%', height = '400px'){
-  shinyWidgetOutput(outputId, 'JcropImagePreview', width, height, package = 'purrpleWidgets')
+  shinyWidgetOutput(outputId, 'JcropImagePreview', width, height, package = 'purrple')
 }
 
 #' Renderer for Image Preview component

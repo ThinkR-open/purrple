@@ -2,8 +2,8 @@
 #' @importFrom htmltools htmlDependency
 purrple_logo_dependency <- function(){
   htmlDependency(
-    name = "purrpleCat", version = packageDescription("purrpleWidgets")$Version,
-    src = system.file( "htmlwidgets", "lib", "purrpleCat", package = "purrpleWidgets"),
+    name = "purrpleCat", version = packageDescription("purrple")$Version,
+    src = system.file( "htmlwidgets", "lib", "purrpleCat", package = "purrple"),
     script = "purrpleCat.js",
     attachment = c( sound = "purr.mp3", image = "purrple.png")
   )

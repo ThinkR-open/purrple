@@ -1,4 +1,4 @@
-# purrpleWidgets
+# purrple
 
 ## JcropImage
 
@@ -11,7 +11,7 @@ the coordinates on `change` and `select` events related to the `JcropImage` widg
 
 ```r
 library(shiny)
-library(purrpleWidgets)
+library(purrple)
 
 ui = shinyUI(fluidPage(
   textOutput("change"), textOutput("select"), JcropImageOutput("image")
@@ -20,7 +20,7 @@ ui = shinyUI(fluidPage(
 server = function(input, output, session) {
 
   output$image <- renderJcropImage(
-    system.file( "cats", "cat2.jpg", package = "purrpleWidgets" ),
+    system.file( "cats", "cat2.jpg", package = "purrple" ),
     opacity = .3
   )
 
@@ -53,7 +53,7 @@ selected part of the image.
 
 ```r
 library(shiny)
-library(purrpleWidgets)
+library(purrple)
 
 ui = shinyUI(fluidPage(
 
@@ -65,7 +65,7 @@ ui = shinyUI(fluidPage(
 ))
 
 server = function(input, output, session) {
-  image <- system.file("cats", "cat3.jpg", package = "purrpleWidgets")
+  image <- system.file("cats", "cat3.jpg", package = "purrple")
 
   output$image <- renderJcropImage( image , opacity = .3, aspect_ratio = 1  )
   output$preview <- renderJcropImagePreview( JcropImagePreview("image", input$image_change) )
@@ -89,7 +89,7 @@ The `fluidImageOutput` widget is similar to the usual `imageOutput` but dynamica
 
 ```r
 library(shiny)
-library(purrpleWidgets)
+library(purrple)
 
 ui = shinyUI(fluidPage(
   fluidRow(
@@ -105,7 +105,7 @@ ui = shinyUI(fluidPage(
 server = function(input, output, session) {
 
   get_cat <- function(i){
-    system.file( "cats", sprintf("cat%d.jpg", i ), package = "purrpleWidgets" )
+    system.file( "cats", sprintf("cat%d.jpg", i ), package = "purrple" )
   }
   output$cat1 <- renderFluidImage( get_cat(1) )
   output$cat2 <- renderFluidImage( get_cat(2) )

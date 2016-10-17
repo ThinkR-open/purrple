@@ -1,5 +1,5 @@
 library(shiny)
-library(purrpleWidgets)
+library(purrple)
 
 ui = shinyUI(fluidPage(
   fluidRow(
@@ -15,7 +15,7 @@ ui = shinyUI(fluidPage(
 server = function(input, output, session) {
 
   get_cat <- function(i){
-    system.file( "cats", sprintf("cat%d.jpg", i ), package = "purrpleWidgets" )
+    system.file( "cats", sprintf("cat%d.jpg", i ), package = "purrple" )
   }
   output$cat1 <- renderFluidImage( get_cat(1) )
   output$cat2 <- renderFluidImage( get_cat(2) )

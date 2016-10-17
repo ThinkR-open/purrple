@@ -25,7 +25,7 @@
 #' @importFrom htmlwidgets shinyWidgetOutput
 #' @export
 JcropImageOutput <- function(outputId, width = "100%", height = "400px" ){
-  shinyWidgetOutput(outputId, 'JcropImage', width = width, height= height , package = 'purrpleWidgets')
+  shinyWidgetOutput(outputId, 'JcropImage', width = width, height= height , package = 'purrple')
 }
 
 get_server_file <- function(src, session){
@@ -53,7 +53,7 @@ renderJcropImage <- function(expr, background = "white", opacity = .3, aspect_ra
     src <- func()
     data <- get_server_file(src, session=session)
     x <- list( data = data, background = background, opacity = opacity, aspect_ratio = aspect_ratio )
-    createWidget( name = "JcropImage", x, package = "purrpleWidgets")
+    createWidget( name = "JcropImage", x, package = "purrple")
   })
   shinyRenderWidget( expression, JcropImageOutput, environment(), quoted = TRUE )
 }

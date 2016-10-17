@@ -9,4 +9,4 @@ dependencies:
     stylesheet:
       - css/jquery.Jcrop.css
       - css/jquery.Jcrop.min.css
-      - css/purrpleWidgets_Jcrop.css
+      - css/purrple_Jcrop.css

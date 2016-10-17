@@ -10,7 +10,7 @@
 #' @importFrom htmlwidgets shinyWidgetOutput
 #' @export
 fluidImageOutput <- function(outputId, width = '100%', height = '400px'){
-  shinyWidgetOutput(outputId, 'fluidImage', width, height, package = 'purrpleWidgets')
+  shinyWidgetOutput(outputId, 'fluidImage', width, height, package = 'purrple')
 }
 
 #' renderer for fluid image output
@@ -29,7 +29,7 @@ renderFluidImage <- function(expr, session = get("session", parent.frame())) {
   expression <- substitute({
     src <- func()
     data <- if( !is.null(src) ) session$fileUrl( file = src, contentType = guess_type(src) )
-    createWidget( name = "fluidImage", list( data = data ), package = "purrpleWidgets")
+    createWidget( name = "fluidImage", list( data = data ), package = "purrple")
   })
   shinyRenderWidget( expression, fluidImageOutput, environment(), quoted = TRUE )
 }
