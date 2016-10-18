@@ -1,11 +1,20 @@
 
 #' @importFrom htmltools htmlDependency
 purrple_logo_dependency <- function(){
+  src     <- system.file( "htmlwidgets", "lib", "purrpleCat", package = "purrple")
+  version <- packageDescription("purrple")$Version
+  name    <- "purrple"
+  target <- sprintf( "%s-%s", name, version )
   htmlDependency(
-    name = "purrpleCat", version = packageDescription("purrple")$Version,
-    src = system.file( "htmlwidgets", "lib", "purrpleCat", package = "purrple"),
+    name = name, version = version ,
+    src = src,
     script = "purrpleCat.js",
-    attachment = c( sound = "purr.mp3", image = "purrple.png")
+    head = sprintf('
+      <link rel="shortcut icon" href="%s/favicon.ico" type="image/x-icon">
+      <link rel="icon" href="%s/favicon.ico" type="image/x-icon">
+    ', target, target),
+    attachment = c( sound = "purr.mp3", image = "purrple.png"),
+    all_files = TRUE
   )
 }
 
