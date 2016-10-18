@@ -1,7 +1,8 @@
 $( function(){
 
-  var mp3 = $("#purrpleCat-sound-attachment").attr("href") ;
-  var img = $("#purrpleCat-image-attachment").attr("href") ;
+  var mp3 = $("#purrple-sound-attachment").attr("href") ;
+  var img = $("#purrple-image-attachment").attr("href") ;
+  console.log(img) ;
   purr_sound = new Audio(mp3) ;
 
   $img = $("<img>") ;
