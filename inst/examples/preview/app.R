@@ -2,7 +2,8 @@
 library(shiny)
 library(purrple)
 
-ui = shinyUI(fluidPage(
+page <- purrplePage(fluidPage)
+ui <- shinyUI( page(
 
   fluidRow(
     column(6, JcropImageOutput("image", height = 400 )),

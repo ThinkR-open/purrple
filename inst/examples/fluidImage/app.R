@@ -1,7 +1,9 @@
 library(shiny)
 library(purrple)
 
-ui = shinyUI(fluidPage(
+page <- purrplePage(fluidPage)
+ui <- shinyUI(page(
+
   fluidRow(
     column(6, fluidImageOutput("cat1", height = 400) ),
     column(6, fluidImageOutput("cat2", height = 400) )
@@ -10,6 +12,7 @@ ui = shinyUI(fluidPage(
     column(6, fluidImageOutput("cat3", height = 400) ),
     column(6, fluidImageOutput("cat4", height = 400) )
   )
+
 ))
 
 server = function(input, output, session) {

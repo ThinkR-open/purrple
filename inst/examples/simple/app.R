@@ -1,13 +1,14 @@
 library(shiny)
 library(purrple)
 
-ui = shinyUI(fluidPage(
+page <- purrplePage(fluidPage)
+ui <- shinyUI( page(
   textOutput("change"),
   textOutput("select"),
   JcropImageOutput("image")
 ))
 
-server = function(input, output, session) {
+server <- function(input, output, session) {
 
   output$image <- renderJcropImage(
     system.file( "cats", "cat2.jpg", package = "purrple" ),
