@@ -9,7 +9,29 @@ HTMLWidgets.widget({
     var gadget = null ;
     var id = el.id ;
     var src = null ;
-    var img = null ;
+    var $img = null ;
+    var x_width, x_height ;
+
+    var reset = function( w, h ){
+      var ratio = x_width / x_height ;
+      var width = x_width ;
+      var height = x_height ;
+
+      if( width > w){
+        width = w ;
+        height = width / ratio ;
+      }
+      if( height > h ){
+        height = h ;
+        width  = height * ratio ;
+      }
+
+      $img.css({
+        "width": width,
+        "height": height
+      }) ;
+
+    } ;
 
     var getImage = function() {
       return $("#" + target + " :first") ;
@@ -34,28 +56,33 @@ HTMLWidgets.widget({
 
         src = x.data ;
 
-        if( img === null ){
+        if( $img === null ){
           $(el).append( '<img />') ;
-          img = $( "#" + id + " img") ;
-          img.attr("src", src) ;
+          $img = $( "#" + id + " img") ;
+          if( x.data.alt ) $img.attr( "alt" , x.data.alt ) ;
 
-          img.css({
-            "max-width": $(el).width(),
-            "max-height": $(el).height()
-          }) ;
-          if( x.data.alt ) img.attr( "alt" , x.data.alt ) ;
+          $img.load( function(){
+            x_width = $img.width() ;
+            x_height = $img.height() ;
 
-          img.Jcrop({
-            aspectRatio: x.aspect_ratio,
-            bgColor: x.bg,
-            bgOpacity: x.opacity,
-            onChange: onChange,
-            onSelect: onSelect,
-            onRelease: onRelease
-          }, function(){
-            gadget = this ;
-            el.gadget = this ;
+            reset( $(el).width(), $(el).height() ) ;
+
+            $img.Jcrop({
+              aspectRatio: x.aspect_ratio,
+              bgColor: x.bg,
+              bgOpacity: x.opacity,
+              onChange: onChange,
+              onSelect: onSelect,
+              onRelease: onRelease
+            }, function(){
+              gadget = this ;
+              el.gadget = this ;
+            }) ;
+
           }) ;
+
+          $img.attr("src", src) ;
+
         } else {
             gadget.setImage( src ) ;
             Shiny.onInputChange( id + "_select", null ) ;
