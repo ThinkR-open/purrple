@@ -6,7 +6,6 @@ HTMLWidgets.widget({
 
   factory: function(el, width, height) {
 
-    var gadget = null ;
     var id = el.id ;
     var src = null ;
     var $img = null ;
@@ -56,38 +55,28 @@ HTMLWidgets.widget({
 
         src = x.data ;
 
-        if( $img === null ){
-          $(el).append( '<img />') ;
-          $img = $( "#" + id + " img") ;
-          if( x.data.alt ) $img.attr( "alt" , x.data.alt ) ;
+        $(el).append( '<img />') ;
+        $img = $( "#" + id + " img") ;
+        if( x.data.alt ) $img.attr( "alt" , x.data.alt ) ;
 
-          $img.load( function(){
-            x_width = $img.width() ;
-            x_height = $img.height() ;
+        $img.load( function(){
+          x_width = $img.width() ;
+          x_height = $img.height() ;
 
-            reset( $(el).width(), $(el).height() ) ;
+          reset( $(el).width(), $(el).height() ) ;
 
-            $img.Jcrop({
-              aspectRatio: x.aspect_ratio,
-              bgColor: x.bg,
-              bgOpacity: x.opacity,
-              onChange: onChange,
-              onSelect: onSelect,
-              onRelease: onRelease
-            }, function(){
-              gadget = this ;
-              el.gadget = this ;
-            }) ;
-
+          $img.Jcrop({
+            aspectRatio: x.aspect_ratio,
+            bgColor: x.bg,
+            bgOpacity: x.opacity,
+            onChange: onChange,
+            onSelect: onSelect,
+            onRelease: onRelease
           }) ;
 
-          $img.attr("src", src) ;
+        }) ;
 
-        } else {
-            gadget.setImage( src ) ;
-            Shiny.onInputChange( id + "_select", null ) ;
-            Shiny.onInputChange( id + "_change", null ) ;
-        }
+        $img.attr("src", src) ;
 
       },
 
