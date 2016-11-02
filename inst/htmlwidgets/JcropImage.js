@@ -9,6 +9,8 @@ HTMLWidgets.widget({
     var id = el.id ;
     var src = null ;
     var $img = null ;
+    var gadget = null ;
+    var previous_x = null ;
     var x_width, x_height ;
 
     var reset = function( w, h ){
@@ -49,13 +51,14 @@ HTMLWidgets.widget({
       Shiny.onInputChange( id + "_change", null ) ;
     } ;
 
-    return {
-      renderValue: function(x) {
+    var render = function(x, $el, width, height) {
         if( x === null) return ;
+
+        if( gadget ) gadget.destroy() ;
 
         src = x.data ;
 
-        $(el).append( '<img />') ;
+        $el.html( '<img />') ;
         $img = $( "#" + id + " img") ;
         if( x.data.alt ) $img.attr( "alt" , x.data.alt ) ;
 
@@ -63,7 +66,7 @@ HTMLWidgets.widget({
           x_width = $img.width() ;
           x_height = $img.height() ;
 
-          reset( $(el).width(), $(el).height() ) ;
+          reset( width, height ) ;
 
           $img.Jcrop({
             aspectRatio: x.aspect_ratio,
@@ -72,15 +75,24 @@ HTMLWidgets.widget({
             onChange: onChange,
             onSelect: onSelect,
             onRelease: onRelease
+          }, function(){
+            gadget = this ;
           }) ;
 
         }) ;
 
         $img.attr("src", src) ;
 
-      },
+      } ;
 
-      resize: function(width, height) {}
+    return {
+      renderValue: function(x){
+        previous_x = x ;
+        render(x, $(el), $(el).width(), $(el).height() ) ;
+      },
+      resize: function(width, height) {
+        render(previous_x, $(el), width, height ) ;
+      }
 
     };
   }

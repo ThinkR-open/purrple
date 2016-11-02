@@ -1,6 +1,6 @@
 Package: purrple
 Title: Some html widgets
-Version: 0.0.6
+Version: 0.0.0007
 Authors@R: c(
   person("Romain", "Francois", email = "romain@purrple.cat", role = c("aut", "cre")),
   person("purrple", role = "cph")
