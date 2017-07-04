@@ -2,8 +2,7 @@ Package: purrple
 Title: Some html widgets
 Version: 0.0.0007
 Authors@R: c(
-  person("Romain", "Francois", email = "romain@purrple.cat", role = c("aut", "cre")),
-  person("purrple", role = "cph")
+    person("Romain", "Francois", email = "romain@thinkr.fr", role = c("aut", "cre"))
   )
 Description: Some html widgets.
 Depends:
